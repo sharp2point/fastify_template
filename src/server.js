@@ -3,13 +3,46 @@ const fastify = Fastify({
   logger: true
 })
 
-fastify.get('/', async (request, reply) => {
+const options = {
+  schema: {
+    // querystring: {
+    //   properties: {
+    //     lastName:{type:'string'}
+    //   },
+    //   required:['lastName']
+    // },
+    // params: {
+    //   properties: {
+    //     name:{type:'string'}
+    //   },
+    //   required:['name']
+    // },
+    // response: {
+    //   200: {
+    //     properties: {
+    //       message:{type:'string'}
+    //     },
+    //     required:['message']
+    //   }
+    // }
+  }
+}
+//  http://localhost:3000
+fastify.get('/',options, async (request, reply) => {
   return { hello: 'world' };
 });
+
+// http://localhost:3000/hello/Dimon?lastName=Borisov
 fastify.route({
   method: "GET",
   url: '/hello/:name',
   schema: {
+    querystring: {
+      properties: {
+        lastName:{type:'string'}
+      },
+      required:['lastName']
+    },
     params: {
       properties: {
         name:{type:'string'}
@@ -19,15 +52,15 @@ fastify.route({
     response: {
       200: {
         properties: {
-          name:{type:'string'}
-          },
-          required:['name']
+          message:{type:'string'}
+        },
+        required:['message']
       }
     }
   },
   handler: (req, res) => {
     return {
-      message: `Hello ${req.params.name}`
+      message: `Hello ${req.params.name} ${req.query.lastName}`
     }
   }
 })
