@@ -9,8 +9,8 @@ const fastify = Fastify({
 });
 
 fastify.register(fastifyStatic, {
-  root: path.join(__dirname, 'public'),
-  prefix: '/public/', // optional: default '/'
+  root: path.join(__dirname, 'dist'),
+  prefix: '/dist/', // optional: default '/'
   //constraints: {host: '127.0.0.1'} // optional: default {}
 });
 
@@ -19,7 +19,6 @@ fastify.register(fastifyStatic, {
 // });
 //  http://localhost:3000
 fastify.get('/', async (request, reply) => {
-  console.log("REQ: ",request)
   return reply.sendFile('index.html');
   //reply.send("Hello")
 });
