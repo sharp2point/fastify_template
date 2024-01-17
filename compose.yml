@@ -4,5 +4,6 @@ services:
   game_server:
     build: ./
     command: npm run start
+    restart: unless-stopped
     ports:
       - "3000:3000"

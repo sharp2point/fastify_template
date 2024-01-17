@@ -9,14 +9,14 @@ const fastify = Fastify({
 });
 
 fastify.register(fastifyStatic, {
-  root: path.join(__dirname, 'app'),
-  prefix: '/app/', 
-});
-fastify.register(fastifyStatic, {
   root: path.join(__dirname, 'public'),
-  prefix: '/public/', 
-  decorateReply: false
+  prefix: '/', 
 });
+// fastify.register(fastifyStatic, {
+//   root: path.join(__dirname, 'public'),
+//   prefix: '/public/', 
+//   decorateReply: false
+// });
 
 // fastify.setNotFoundHandler(function (request, reply) {
 //   reply.send({message:"Now Time"});
