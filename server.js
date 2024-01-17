@@ -8,6 +8,13 @@ const fastify = Fastify({
   logger: true
 });
 
+//-------------------------------------------
+const port = process.env.PORT;
+const host = process.env.HOST;
+
+console.log("HOST: ",host,":",port)
+//-------------------------------------------
+
 fastify.register(fastifyStatic, {
   root: path.join(__dirname, 'public'),
   prefix: '/', 
@@ -61,7 +68,7 @@ fastify.get('/', async (request, reply) => {
 
 
 const start = async () => {
-    fastify.listen({ port: 3000, host: '0.0.0.0' }, function (err, address) {
+    fastify.listen({ port: port, host: host }, function (err, address) {
         if (err) {
             fastify.log.error(err)
             process.exit(1)
