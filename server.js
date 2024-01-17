@@ -9,9 +9,13 @@ const fastify = Fastify({
 });
 
 fastify.register(fastifyStatic, {
-  root: path.join(__dirname, 'dist'),
-  prefix: '/dist/', // optional: default '/'
-  //constraints: {host: '127.0.0.1'} // optional: default {}
+  root: path.join(__dirname, 'app'),
+  prefix: '/app/', 
+});
+fastify.register(fastifyStatic, {
+  root: path.join(__dirname, 'public'),
+  prefix: '/public/', 
+  decorateReply: false
 });
 
 // fastify.setNotFoundHandler(function (request, reply) {
@@ -20,7 +24,6 @@ fastify.register(fastifyStatic, {
 //  http://localhost:3000
 fastify.get('/', async (request, reply) => {
   return reply.sendFile('index.html');
-  //reply.send("Hello")
 });
 
 // http://localhost:3000/hello/Dimon?lastName=Borisov
